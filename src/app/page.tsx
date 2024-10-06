@@ -4,7 +4,7 @@ import { useState } from 'react'
 import ImageUpload from '../components/ImageUpload'
 import WebcamCapture from '../components/WebcamCapture'
 import AddFace from '../components/AddFace'
-import { Button } from "@/components/ui/button"
+import Navbar from '../components/Navbar';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function Home() {
@@ -12,12 +12,7 @@ export default function Home() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Face Recognition App</h1>
-      <div className="flex flex-wrap gap-4 mb-4">
-        <Button onClick={() => setMode('upload')}>Upload Image</Button>
-        <Button onClick={() => setMode('webcam')}>Use Webcam</Button>
-        <Button onClick={() => setMode('add')}>Add New Face</Button>
-      </div>
+      <Navbar setMode={setMode} />
       {mode && (
         <Card>
           <CardHeader>
