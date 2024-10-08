@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 import { Button } from "@/components/ui/button"
+import Image from 'next/image'
 
 export default function WebcamCapture() {
   const webcamRef = useRef<Webcam>(null)
@@ -40,8 +41,27 @@ export default function WebcamCapture() {
       <Button onClick={capture}>Capture and Recognize</Button>
       {result && (
         <div className="mt-4">
-          <h2 className="text-xl font-semibold">Result:</h2>
-          <pre className="bg-gray-100 p-2 rounded">{JSON.stringify(result, null, 2)}</pre>
+          <h2 className="text-xl font-semibold text-center">Result:</h2>
+
+          <div 
+            className="bg-gray-100 p-4 rounded overflow-auto mx-auto" 
+            style={{ maxHeight: '200px', overflowWrap: 'break-word', whiteSpace: 'pre-wrap' }}
+          >
+            <pre>{JSON.stringify(result, null, 2)}</pre>
+          </div>
+
+          {result.image && (
+            <div className="mt-4 flex justify-center">
+              <Image 
+                src={`data:image/jpeg;base64,${result.image}`} 
+                alt="Recognized face" 
+                width={500} 
+                height={500}
+                className="mx-auto"
+                unoptimized
+              />
+            </div>
+          )}
         </div>
       )}
     </div>
